@@ -1,0 +1,38 @@
+= form_for @person do |f|
+  .form-group
+    label class="control-label" for="gender" Gender
+    .input-group
+      span class="input-group-addon"&nbsp;&nbsp;&nbsp;
+      select.form-control [
+        name="person[gender]"
+        placeholder="Person's Gender"
+        type="text"
+        value='#{@person.gender}'
+        ]
+        option selected=(@person.gender == 'female') female
+        option selected=(@person.gender == 'male') male
+  .form-group
+    label class="control-label" for="height" Height
+    .input-group
+      span.input-group-addon &nbsp;in
+      input.form-control [
+        max='120'
+        min='0'
+        name="person[height]"
+        placeholder="Person's Height"
+        type="number"
+        value='#{@person.height}'
+        ]
+  .form-group
+    label class="control-label" for="weight" Weight
+    .input-group
+      span.input-group-addon lbs
+      input.form-control [
+        max='999'
+        min='0'
+        name="person[weight]"
+        placeholder="Person's Weight"
+        type="number"
+        value='#{@person.weight}'
+        ]
+  button.btn.btn-primary type="submit" Submit

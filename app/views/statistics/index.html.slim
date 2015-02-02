@@ -1,0 +1,23 @@
+h1 Statistics
+
+- @classified_models.each do |model|
+  h2 = model.name
+  - model.classified_fields.each do |field|
+    h3 = field.name.titleize
+    table.table.table-striped style='border: 1px'
+      thead
+        tr
+          th Classification
+          th Probability
+          th Attribute
+          th Mean
+          th Variance
+      - field.classifications.each_with_index do |classification, class_index|
+        - classification.analyzed_fields.each_with_index do |analyzed_field, index|
+          tbody
+            tr style='background-color:#{class_index.even? ? '#eee': 'white' }'
+              td = classification.name if index == 0
+              td = classification.probability if index == 0
+              td = analyzed_field.name
+              td = analyzed_field.mean
+              td = analyzed_field.variance

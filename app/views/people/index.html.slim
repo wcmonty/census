@@ -1,0 +1,27 @@
+javascript:
+  $(function () {
+    $(".tablesorter").tablesorter();
+  });
+  console.log('Foo');
+
+h1 People
+
+table.tablesorter.table.table-striped style='border: 1px'
+  thead
+    tr
+      th Gender
+      th Height
+      th Weight
+      th
+  tbody
+    - @people.each do |person|
+      tr
+        td = person.gender
+        td = person.height
+        td = person.weight
+        td
+          a href='#{edit_person_path(person.id)}' Edit
+        td = link_to 'Destroy', person, data: {:confirm => 'Are you sure?'}, method: :delete
+
+br
+a.btn.btn-default [href='#{new_person_path}'] New Person
