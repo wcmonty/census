@@ -1,0 +1,2 @@
+module CategorizerHelper
+end
