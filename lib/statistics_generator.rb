@@ -68,7 +68,7 @@ class StatisticsGenerator
   def fields_to_analyze
     columns = klass.columns_hash
     columns.select { |key| columns[key].type == :integer || columns[key].type == :float }
-        .reject { |key| key == 'id'}.keys
+      .reject { |key| key == 'id' }.keys
   end
 
   def current_values_in(field)

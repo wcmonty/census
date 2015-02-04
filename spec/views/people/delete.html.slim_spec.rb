@@ -1,5 +1,5 @@
 require 'rails_helper'
 
-RSpec.describe "people/delete.html.slim", :type => :view do
+RSpec.describe 'people/delete.html.slim', type: :view do
   pending "add some examples to (or delete) #{__FILE__}"
 end

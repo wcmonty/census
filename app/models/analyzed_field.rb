@@ -20,6 +20,6 @@ class AnalyzedField < ActiveRecord::Base
   private
 
   def find_statistics_by(name)
-    statistics.find {|statistic| statistic.name == name}.value rescue 0
+    statistics.find { |statistic| statistic.name == name }.value rescue 0
   end
 end

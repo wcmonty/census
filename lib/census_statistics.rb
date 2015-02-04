@@ -1,10 +1,8 @@
 class Census::Statistics
   def self.probability_density(mean, variance, value)
-    begin
-      probability_density_multiplier(variance) * Math.exp(probability_density_exponent(mean, variance, value))
-    rescue
-      0
-    end
+    probability_density_multiplier(variance) * Math.exp(probability_density_exponent(mean, variance, value))
+  rescue
+    0
   end
 
   def self.mean(array)

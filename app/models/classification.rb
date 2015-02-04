@@ -6,6 +6,6 @@ class Classification < ActiveRecord::Base
 
   def posterior_numerator(target)
     @posterior_numerator ||= probability *
-        analyzed_fields.map { |field| target ? field.probability_density(target) : 1 }.reduce(&:*)
+                             analyzed_fields.map { |field| target ? field.probability_density(target) : 1 }.reduce(&:*)
   end
 end

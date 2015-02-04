@@ -1,7 +1,6 @@
 ruby '2.2.0'
 source 'https://rubygems.org'
 
-
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.0'
 
@@ -27,7 +26,7 @@ gem 'jquery-tablesorter'
 gem 'turbolinks'
 
 group :produciton do
-	gem 'rails_12factor'
+  gem 'rails_12factor'
 end
 
 group :development do

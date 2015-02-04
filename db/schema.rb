@@ -11,54 +11,52 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150201231620) do
-
-  create_table "analyzed_fields", force: :cascade do |t|
-    t.integer  "classification_id"
-    t.string   "name"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
+ActiveRecord::Schema.define(version: 20_150_201_231_620) do
+  create_table 'analyzed_fields', force: :cascade do |t|
+    t.integer 'classification_id'
+    t.string 'name'
+    t.datetime 'created_at',        null: false
+    t.datetime 'updated_at',        null: false
   end
 
-  add_index "analyzed_fields", ["classification_id"], name: "index_analyzed_fields_on_classification_id"
+  add_index 'analyzed_fields', ['classification_id'], name: 'index_analyzed_fields_on_classification_id'
 
-  create_table "classifications", force: :cascade do |t|
-    t.string   "name"
-    t.integer  "classified_field_id"
-    t.float    "probability"
-    t.datetime "created_at",          null: false
-    t.datetime "updated_at",          null: false
+  create_table 'classifications', force: :cascade do |t|
+    t.string 'name'
+    t.integer 'classified_field_id'
+    t.float 'probability'
+    t.datetime 'created_at',          null: false
+    t.datetime 'updated_at',          null: false
   end
 
-  create_table "classified_fields", force: :cascade do |t|
-    t.string   "name"
-    t.integer  "classified_model_id"
-    t.datetime "created_at",          null: false
-    t.datetime "updated_at",          null: false
+  create_table 'classified_fields', force: :cascade do |t|
+    t.string 'name'
+    t.integer 'classified_model_id'
+    t.datetime 'created_at',          null: false
+    t.datetime 'updated_at',          null: false
   end
 
-  create_table "classified_models", force: :cascade do |t|
-    t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+  create_table 'classified_models', force: :cascade do |t|
+    t.string 'name'
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
   end
 
-  create_table "people", force: :cascade do |t|
-    t.string   "gender"
-    t.integer  "height"
-    t.integer  "weight"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+  create_table 'people', force: :cascade do |t|
+    t.string 'gender'
+    t.integer 'height'
+    t.integer 'weight'
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
   end
 
-  create_table "statistics", force: :cascade do |t|
-    t.integer  "analyzed_field_id"
-    t.string   "name"
-    t.float    "value"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
+  create_table 'statistics', force: :cascade do |t|
+    t.integer 'analyzed_field_id'
+    t.string 'name'
+    t.float 'value'
+    t.datetime 'created_at',        null: false
+    t.datetime 'updated_at',        null: false
   end
 
-  add_index "statistics", ["analyzed_field_id"], name: "index_statistics_on_analyzed_field_id"
-
+  add_index 'statistics', ['analyzed_field_id'], name: 'index_statistics_on_analyzed_field_id'
 end
