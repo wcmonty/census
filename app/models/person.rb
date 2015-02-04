@@ -1,3 +1,4 @@
+# A person that is either used for seed data or to be classified against the seed data
 class Person < ActiveRecord::Base
   validates :gender, inclusion: { in: %w(male female) }
   validates :height, numericality: { only_integer: true, greater_than: 0 }

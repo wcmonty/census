@@ -19,8 +19,6 @@ class Census::Statistics
     end
   end
 
-  private
-
   def self.probability_density_exponent(mean, variance, value)
     value_to_square = (value - mean) / variance # Can divide by zero
     -0.5 * value_to_square * value_to_square

@@ -1,3 +1,4 @@
+# Controller for People
 class PeopleController < ApplicationController
   before_action :set_person, only: [:edit, :update, :destroy]
 

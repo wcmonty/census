@@ -1,3 +1,4 @@
+# Container for all fields that a Model might have
 class ClassifiedModel < ActiveRecord::Base
   validates :name, presence: true
 

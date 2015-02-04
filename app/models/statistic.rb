@@ -1,3 +1,4 @@
+# A statistic
 class Statistic < ActiveRecord::Base
   belongs_to :analyzed_field
 

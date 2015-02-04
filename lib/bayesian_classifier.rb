@@ -1,3 +1,5 @@
+# Service class that classifies a subject using statistical analysis
+# See http://en.wikipedia.org/wiki/Naive_Bayes_classifier
 class BayesianClassifier
   attr_reader :klass, :target
 

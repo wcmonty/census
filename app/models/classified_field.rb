@@ -1,3 +1,4 @@
+# Container for data about a specific field that is marked as a classification field
 class ClassifiedField < ActiveRecord::Base
   validates :name, presence: true
 

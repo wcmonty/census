@@ -1,3 +1,4 @@
+# Represents a classification of a model
 class Classification < ActiveRecord::Base
   validates :name, presence: true
 

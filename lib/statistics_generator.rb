@@ -30,9 +30,9 @@ class StatisticsGenerator
 
   def create_classification(classification, field, number_of_records)
     probability =  number_of_records.to_f / klass.count
-    classification = Classification.create(name: classification,
-                                           classified_field_id: field.id,
-                                           probability: probability)
+    Classification.create(name: classification,
+                          classified_field_id: field.id,
+                          probability: probability)
   end
 
   def analyze_fields(field_to_classify, classification)

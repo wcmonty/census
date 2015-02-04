@@ -1,3 +1,4 @@
+# Container for statistics gathered for a specific field on a model
 class AnalyzedField < ActiveRecord::Base
   validates :name, presence: true
 
