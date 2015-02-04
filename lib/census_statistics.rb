@@ -1,4 +1,4 @@
-class StatisticsHelper
+class Census::Statistics
   def self.probability_density(mean, variance, value)
     begin
       probability_density_multiplier(variance) * Math.exp(probability_density_exponent(mean, variance, value))
