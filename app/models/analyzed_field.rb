@@ -5,15 +5,21 @@ class AnalyzedField < ActiveRecord::Base
   has_many :statistics, dependent: :destroy
 
   def mean
-    @mean ||= statistics.find {|statistic| statistic.name == 'mean'}.value rescue 0
+    @mean ||= find_statistics_by('mean')
   end
 
   def variance
-    @variance ||= statistics.find {|statistic| statistic.name == 'variance'}.value rescue 0
+    @variance ||= find_statistics_by('variance')
   end
 
   def probability_density(target)
     value = target.send(name)
-    MathHelper.probability_density(mean, variance, value)
+    StatisticsHelper.probability_density(mean, variance, value)
+  end
+
+  private
+
+  def find_statistics_by(name)
+    statistics.find {|statistic| statistic.name == name}.value rescue 0
   end
 end

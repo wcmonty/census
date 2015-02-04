@@ -1,5 +1,5 @@
+# Generates statistics for a given class
 class StatisticsGenerator
-  include ArrayStatistics
   attr_reader :klass
 
   def initialize(klass)
@@ -28,8 +28,8 @@ class StatisticsGenerator
     end
   end
 
-  def create_classification(classification, field, number_of_these_records)
-    probability =  number_of_these_records.to_f / klass.count
+  def create_classification(classification, field, number_of_records)
+    probability =  number_of_records.to_f / klass.count
     classification = Classification.create(name: classification,
                                            classified_field_id: field.id,
                                            probability: probability)
@@ -47,11 +47,11 @@ class StatisticsGenerator
   end
 
   def generate_mean(analyzed_field, data)
-    Statistic.create(analyzed_field_id: analyzed_field.id, name: 'mean', value: mean(data))
+    Statistic.create(analyzed_field_id: analyzed_field.id, name: 'mean', value: StatisticHelper.mean(data))
   end
 
   def generate_variance(analyzed_field, data)
-    Statistic.create(analyzed_field_id: analyzed_field.id, name: 'variance', value: sample_variance(data))
+    Statistic.create(analyzed_field_id: analyzed_field.id, name: 'variance', value: StatisticsHelper.sample_variance(data))
   end
 
   # We would probably want to allow explicit setting of fields to classify
