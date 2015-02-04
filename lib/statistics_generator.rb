@@ -51,7 +51,9 @@ class StatisticsGenerator
   end
 
   def generate_variance(analyzed_field, data)
-    Statistic.create(analyzed_field_id: analyzed_field.id, name: 'variance', value: Census::Statistics.sample_variance(data))
+    Statistic.create(analyzed_field_id: analyzed_field.id,
+                     name: 'variance',
+                     value: Census::Statistics.sample_variance(data))
   end
 
   # We would probably want to allow explicit setting of fields to classify
