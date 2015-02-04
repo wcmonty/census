@@ -43,6 +43,13 @@ class PeopleController < ApplicationController
     redirect_to people_url, notice: 'Person was successfully destroyed.'
   end
 
+  # GET /people/categorize
+  def categorize
+    my_params = person_params rescue {}
+    @person = Person.new(my_params)
+    @show_results = params[:submitted] == 'true'
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_person

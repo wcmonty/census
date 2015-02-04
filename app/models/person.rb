@@ -12,9 +12,14 @@ class Person < ActiveRecord::Base
   after_update  :generate_statistics
   after_destroy :generate_statistics
 
+  def categories
+    @categories ||= BayesianClassifier.new(self).run
+  end
+
   private
 
   def generate_statistics
     StatisticsGenerator.new(Person).run
   end
+
 end

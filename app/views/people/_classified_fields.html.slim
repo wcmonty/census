@@ -1,0 +1,12 @@
+.form-group
+  label class="control-label" for="gender" Gender
+  .input-group
+    span class="input-group-addon"&nbsp;&nbsp;&nbsp;
+    select.form-control [
+      name="person[gender]"
+      placeholder="Person's Gender"
+      type="text"
+      value='#{@person.gender}'
+      ]
+      option selected=(@person.gender == 'female') female
+      option selected=(@person.gender == 'male') male

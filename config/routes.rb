@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  get 'categorizer/index'
+  get 'people/categorize'
   get 'statistics/index'
 
   get 'home/index'

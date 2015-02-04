@@ -1,0 +1,24 @@
+.form-group
+  label class="control-label" for="height" Height
+  .input-group
+    span.input-group-addon &nbsp;in
+    input.form-control [
+      max='120'
+      min='0'
+      name="person[height]"
+      placeholder="Person's Height"
+      type="number"
+      value='#{@person.height}'
+      ]
+.form-group
+  label class="control-label" for="weight" Weight
+  .input-group
+    span.input-group-addon lbs
+    input.form-control [
+      max='999'
+      min='0'
+      name="person[weight]"
+      placeholder="Person's Weight"
+      type="number"
+      value='#{@person.weight}'
+      ]

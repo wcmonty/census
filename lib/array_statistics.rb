@@ -4,8 +4,14 @@ module ArrayStatistics
   end
 
   def sample_variance(array)
+    return 0 if array.size <= 1
+
     mean = self.mean(array)
-    array.map { |number| diff = mean - number; diff * diff }
-      .reduce(&:+).to_f / (array.size - 1) rescue 0
+    begin
+      array.map { |number| diff = mean - number; diff * diff }
+          .reduce(&:+).to_f / (array.size - 1)
+    rescue
+      0
+    end
   end
 end

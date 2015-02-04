@@ -1,0 +1,9 @@
+h1 Categorize person
+
+== render 'people/categorize_form'
+
+a.btn.btn-default href='#{people_path}' style='margin-top: 10px' Back
+
+- if @show_results
+  h2 Results
+  p We predict that the person is a #{ @person.categories.join(',') }
