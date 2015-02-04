@@ -9,9 +9,6 @@ class BayesianClassifier
     guesses = []
 
     fields_to_classify.each do |field_to_classify|
-      field_to_classify.classifications.each do |x|
-        Rails.logger.debug("posterior numerator for #{x.name} is #{x.posterior_numerator(target)}" )
-      end
       guesses << field_to_classify.classifications
         .max { |classification| classification.posterior_numerator(target) }.name
     end
@@ -28,11 +25,11 @@ class BayesianClassifier
   end
 
   def fields_to_classify
-    @fields_to_classify ||= model.classified_fields.select {|x| nil_fields.include?(x.name) }
+    @fields_to_classify ||= model.classified_fields.select {|field| nil_fields.include?(field.name) }
   end
 
   def nil_fields
-    @nil_fields ||= target.attributes.select {|x| target.send(x).nil? }.keys
+    @nil_fields ||= target.attributes.select {|attribute| target.send(attribute).nil? }.keys
   end
 
 
