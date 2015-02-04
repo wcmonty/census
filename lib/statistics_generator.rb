@@ -47,7 +47,7 @@ class StatisticsGenerator
   end
 
   def generate_mean(analyzed_field, data)
-    Statistic.create(analyzed_field_id: analyzed_field.id, name: 'mean', value: StatisticHelper.mean(data))
+    Statistic.create(analyzed_field_id: analyzed_field.id, name: 'mean', value: StatisticsHelper.mean(data))
   end
 
   def generate_variance(analyzed_field, data)
