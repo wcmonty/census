@@ -1,28 +1,46 @@
 == README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+=Summary
+The U.S. Census Bureau had a hard-drive failure and lost a portion of their data about the
+gender of survey respondents. To help them guess at the gender of each respondent, we're
+going to use a Naive Bayes Classifier.
 
-Things you may want to cover:
+=Assumptions
+There are numerous assumptions about the needs of the U.S. Census Bureau, that drove the design
+of the project.  The assumptions are listed below, along with the consequences of the assumptions:
+- The training data would include no more than 1,000,000 records. Since the data to analyze is 
+stored as integers, a single field should fit in memory and the system does not have to process
+the data in chunks.
+- The training data will most likely be loaded initially and then the system will be used to
+predict the other data.  This implies that the statistics on the data should be calculated and
+stored instead of being run on every query.
+- The training data will be loaded manually, so a form is suitable for data entry.  In the future, 
+the Census Bureau might resort to using a formatted file to load the training data.  In this case,
+the statistics should be generated after processing the entire file. 
+- It is likely that the data that the Census Bureau would like to classify is incomplete.  For
+example, the height of weight field might be missing from the data to classify.  The classification
+algorithm should make a best guess in the case that data is missing.
+- It is likely that the Census Bureau would like to add additional fields to classify.  These
+fields might include race/ethnicity, religion, or income bracket.  The system should be able
+to handle this with minimum modifications.
+- It is likely that the Census Bureau would like to add additional fields as attributes in order
+to make the classification a better predictor.  This might be education, shoe size, or income.
+The system should automatically generate statistics on those fields and use them to help classify.
+- It is likely that the Census Bureau has other data sets that they would like to analyze.  It should be easy to process those data sets as well.
 
-* Ruby version
+=Implementation
+There is a standard form that allows users to create, edit, and delete records for people.  
+On each of these actions, the statistics are generated and stored in the database.  In a real 
+system, this would probably be triggered periodically instead of from ActiveRecord callbacks, 
+but I felt that this was acceptable as a demonstration system.
 
-* System dependencies
+When the statistics are generated, the system analyzes the database table to determine which 
+fields are classes and which are attributes.  Right now, the system considers any column 
+that is a string type to hold classifications and any column that is a float or integer to hold
+attributes.  In a real system, we would probably want to allow the columns to be specified 
+either in code or by the user.
 
-* Configuration
+The statistics are displayed on the "Statistics" page.  They are automatically broken down by table, classification field, and attribute fields.
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+Data is predicted using the Bayesian Classifier on the 'Categorize' page.  Since the statistics are 
+stored, the statistics need to be looked up in the database and fed to the formulas along with the target data.  The user can enter data into all, some, or none of the form fields.  The system will make its best guess based on the available data.  If no data is entered, the function degenerates into the single probability of the classes and the class with the most entries is always chosen.
