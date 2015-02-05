@@ -1,5 +1,3 @@
-== README
-
 =Summary
 The U.S. Census Bureau had a hard-drive failure and lost a portion of their data about the
 gender of survey respondents. To help them guess at the gender of each respondent, we're
