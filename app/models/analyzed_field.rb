@@ -15,7 +15,7 @@ class AnalyzedField < ActiveRecord::Base
 
   def probability_density(target)
     value = target.send(name)
-    Census::Statistics.probability_density(mean, variance, value)
+    StatisticsCalculator.probability_density(mean, variance, value)
   end
 
   private
