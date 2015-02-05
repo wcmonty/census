@@ -12,8 +12,6 @@ class BayesianClassifier
 
     fields_to_classify.each do |field_to_classify|
       max = field_to_classify.classifications.max do |a, b|
-        Rails.logger.debug("classification.name #{a.name} #{a.posterior_numerator(target)}")
-        Rails.logger.debug("classification.name #{b.name} #{b.posterior_numerator(target)}")
         a.posterior_numerator(target) <=> b.posterior_numerator(target)
       end
 
