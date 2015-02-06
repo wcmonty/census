@@ -15,7 +15,7 @@ class BayesianClassifier
         a.posterior_numerator(target) <=> b.posterior_numerator(target)
       end
 
-      guesses << max.name
+      guesses << max.name if max
     end
 
     guesses

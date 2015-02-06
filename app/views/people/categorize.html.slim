@@ -6,4 +6,7 @@ a.btn.btn-default href='#{people_path}' style='margin-top: 10px' Back
 
 - if @show_results
   h2 Results
-  p We predict that the person is a #{ @person.categories.join(',') }
+  - if @person.categories.present?
+    p We predict that the person is a #{ @person.categories.join(',') }.
+  - else
+    p Unable to make a prediction at this time.  Try entering some data.
