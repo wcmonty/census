@@ -1,0 +1,2 @@
+class LocalFileOpener
+end
