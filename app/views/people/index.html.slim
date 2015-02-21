@@ -10,15 +10,16 @@ table.tablesorter.table.table-striped style='border: 1px'
   thead
     tr
       th Gender
-      th Height
-      th Weight
-      th
+      th style='text-align: center' Height
+      th style='text-align: center' Weight
+      th style='width: 30px'
+      th style='width: 30px'
   tbody
     - @people.each do |person|
       tr
-        td = person.gender
-        td = person.height
-        td = person.weight
+        td = person.gender || '-'
+        td style='text-align: center' = person.height || '-'
+        td style='text-align: center' = person.weight || '-'
         td
           a href='#{edit_person_path(person.id)}' Edit
         td = link_to 'Destroy', person, data: {:confirm => 'Are you sure?'}, method: :delete
