@@ -1,6 +1,3 @@
-require_relative 'remote_file_opener'
-require_relative 'local_file_opener'
-
 class FileOpener
 
   def initialize(filename)
@@ -9,7 +6,7 @@ class FileOpener
   end
 
   def contents
-    opener.contents
+    parse_json opener.contents
   end
 
   protected
@@ -28,6 +25,15 @@ class FileOpener
       RemoteFileOpener
     else
       LocalFileOpener
+    end
+  end
+
+  def parse_json(contents)
+    begin
+      JSON.parse(contents)
+    rescue
+      puts 'Invalid JSON'
+      {}
     end
   end
 end

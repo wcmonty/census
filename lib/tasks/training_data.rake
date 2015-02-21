@@ -1,21 +1,6 @@
-require_relative '../file_opener'
-require 'json'
-
-def parse_json(contents)
-  begin
-    JSON.parse(contents)
-  rescue
-    puts 'Invalid JSON'
-    {}
-  end
-end
-
-def convert_height(feet)
-  (feet * 12).round rescue nil
-end
-
-def convert_weight(pounds)
-  pounds.round rescue nil
+def get_attributes(args)
+  contents = FileOpener.new(args[:file]).contents
+  contents['people'].map { |hash| map_json_fields(hash['person']) }
 end
 
 def map_json_fields(person)
@@ -26,17 +11,14 @@ def map_json_fields(person)
   }
 end
 
-def now_function
-  adapter = ActiveRecord::Base.connection_config[:adapter]
-  case adapter
-  when 'sqlite3'
-    "DATETIME('now')"
-  when 'postgresql'
-    "now()"
-  else
-    raise "Database adapter not configured"
-  end
+def convert_height(feet)
+  (feet * 12).round rescue nil
 end
+
+def convert_weight(pounds)
+  pounds.round rescue nil
+end
+
 
 def add_people(attributes_array)
   sql =  "INSERT INTO people ('height', 'weight', 'gender', 'created_at', 'updated_at')"
@@ -51,10 +33,16 @@ def add_people(attributes_array)
   st.close
 end
 
-def get_attributes(args)
-  contents = FileOpener.new(args[:file]).contents
-  json_hash = parse_json(contents)
-  attributes_array = json_hash['people'].map { |hash| map_json_fields(hash['person']) }
+def now_function
+  adapter = ActiveRecord::Base.connection_config[:adapter]
+  case adapter
+    when 'sqlite3'
+      "DATETIME('now')"
+    when 'postgresql'
+      "now()"
+    else
+      raise "Database adapter not configured"
+  end
 end
 
 namespace :training_data do
