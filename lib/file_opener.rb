@@ -8,8 +8,8 @@ class FileOpener
     @opener = klass.new(filename)
   end
 
-  def run
-    opener.run
+  def contents
+    opener.contents
   end
 
   protected

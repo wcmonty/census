@@ -4,7 +4,7 @@ class RemoteFileOpener
     @uri = uri
   end
 
-  def run
+  def contents
     puts "Opening uri: #{uri}"
   end
 
