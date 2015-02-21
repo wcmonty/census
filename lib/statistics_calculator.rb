@@ -7,14 +7,16 @@ class StatisticsCalculator
   end
 
   def self.mean(array)
-    array.reduce(&:+).to_f / array.size rescue 0
+    compacted_array = array.compact
+    compacted_array.reduce(&:+).to_f / compacted_array.size rescue 0
   end
 
   def self.sample_variance(array)
-    return 0 if array.size <= 1
+    compacted_array = array.compact
+    return 0 if compacted_array.size <= 1
 
     begin
-      sum_of_squares_of_differences(array) / (array.size - 1)
+      sum_of_squares_of_differences(compacted_array) / (compacted_array.size - 1)
     rescue
       0
     end
