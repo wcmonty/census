@@ -25,7 +25,10 @@ gem 'jquery-tablesorter'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
 
-group :produciton do
+# Use HTTParty for fetching remote resources
+gem 'httparty'
+
+group :production do
   gem 'rails_12factor'
 end
 
