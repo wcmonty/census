@@ -18,6 +18,19 @@ Then(/^there should be the following "([^"]*)" records:$/) do |record, table|
   # table is a table.hashes.keys # => [:height, :weight, :gender]
   klass = record.classify.constantize
   table.hashes.each do |hash|
-    expect(klass.where(hash).count).to be == 1
+    replace_nils(hash)
+    expect(klass.where(hash).count).to be >= 1
+  end
+end
+
+
+Then(/^there should be (\d+) "(.+)" records$/) do |number, record|
+  klass = record.classify.constantize
+  expect(klass.count).to eq 50
+end
+
+def replace_nils(hash)
+  hash.each do |key, value|
+    hash[key] = nil if value == 'nil'
   end
 end

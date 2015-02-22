@@ -22,11 +22,21 @@ Feature: Import Training Data
     When I import the data from "data.json"
     And I delete the file named "data.json"
     Then there should be the following "person" records:
-    | height | weight | gender |
-    | 62     | 167    | Female |
+    | gender | height | weight |
+    | Female | 62     | 167    | 
 
   Scenario: Import data from a remote, valid file
     When I import the data from "https://gist.githubusercontent.com/wcmonty/e00b663d38f67fb49175/raw/0ab05fd8c126663ea88dc6fa4af901bfac46cdd8/gender_classifier_training_data.json"
     Then there should be the following "person" records:
-    | height | weight | gender |
-    | 62     | 167    | Female |
+      | gender | height | weight |
+      | Female | 62     | 167    |
+      | Male   | 54     | 209    |
+      | Female | 58     | 219    |
+      | Female | 69     | 161    |
+      | Female | 50     | 106    |
+      | Male   | 59     | 107    |
+      | Male   | 58     | 155    |
+      | Male   | nil    | 201    |
+      | Female | nil    | 110    |
+      | Male   | 62     | nil    |
+    And there should be 50 "person" records
