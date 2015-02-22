@@ -6,7 +6,11 @@ class FileOpener
   end
 
   def contents
-    parse_json opener.contents
+    begin
+      parse_json opener.contents
+    rescue
+      puts "Could not open #{filename}"
+    end
   end
 
   protected
