@@ -1,5 +1,5 @@
-require_relative 'sqlite3_preparer'
-require_relative 'postgresql_preparer'
+require_relative '../sqlite3_preparer'
+require_relative '../postgresql_preparer'
 
 def get_attributes(args)
   contents = FileOpener.new(args[:file]).contents

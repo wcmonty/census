@@ -28,6 +28,9 @@ gem 'turbolinks'
 # Use HTTParty for fetching remote resources
 gem 'httparty'
 
+# Require a directory
+gem 'require_all'
+
 group :production do
   gem 'rails_12factor'
 end
@@ -35,7 +38,6 @@ end
 group :development do
   # Use sqlite3 as the database for Active Record
   gem 'sqlite3'
-  gem 'pry-byebug'
   gem 'rubocop'
   #  gem 'rack-mini-profiler'
 end
@@ -51,6 +53,7 @@ group :development, :test do
 end
 
 group :test do
+  gem 'pry-byebug'
   gem 'cucumber-rails', :require => false
   gem 'database_cleaner'
 end
