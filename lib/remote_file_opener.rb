@@ -1,11 +1,13 @@
 class RemoteFileOpener
+  include HTTParty
 
   def initialize(uri)
     @uri = uri
   end
 
   def contents
-    puts "Opening uri: #{uri}"
+    response = HTTParty.get(uri)
+    response.body
   end
 
   protected

@@ -1,6 +1,12 @@
 def get_attributes(args)
   contents = FileOpener.new(args[:file]).contents
-  contents['people'].map { |hash| map_json_fields(hash['person']) }
+
+  begin
+    contents['people'].map { |hash| map_json_fields(hash['person']) }
+  rescue
+    puts "JSON incorrectly formatted"
+    []
+  end
 end
 
 def map_json_fields(person)
