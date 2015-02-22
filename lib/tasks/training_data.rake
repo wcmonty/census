@@ -1,3 +1,6 @@
+require_relative 'sqlite3_preparer'
+require_relative 'postgresql_preparer'
+
 def get_attributes(args)
   contents = FileOpener.new(args[:file]).contents
 
@@ -27,25 +30,22 @@ end
 
 
 def add_people(attributes_array)
-  sql =  "INSERT INTO people ('height', 'weight', 'gender', 'created_at', 'updated_at')"
-  sql += "  VALUES (?, ?, ?, #{now_function}, #{now_function})"
-
-  st = ActiveRecord::Base.connection.raw_connection.prepare(sql)
+  preparer = get_preparer.new
   Person.transaction do
     attributes_array.each do |attributes|
-      st.execute(attributes[:height], attributes[:weight], attributes[:gender])
+      preparer.execute(attributes[:height], attributes[:weight], attributes[:gender])
     end
   end
-  st.close
+  preparer.close
 end
 
-def now_function
+def get_preparer
   adapter = ActiveRecord::Base.connection_config[:adapter]
   case adapter
     when 'sqlite3'
-      "DATETIME('now')"
+      Sqlite3Preparer
     when 'postgresql'
-      "now()"
+      PostgresqlPreparer
     else
       raise "Database adapter not configured"
   end
@@ -60,6 +60,7 @@ namespace :training_data do
   end
 
   task :clear => :environment do
-    Person.destroy_all
+    Person.delete_all
+    StatisticsGenerator.new(Person).run
   end
 end
