@@ -127,6 +127,9 @@ GEM
     pry-byebug (2.0.0)
       byebug (~> 3.4)
       pry (~> 0.10)
+    pry-stack_explorer (0.4.9.2)
+      binding_of_caller (>= 0.7)
+      pry (>= 0.9.11)
     rack (1.6.0)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -253,6 +256,7 @@ DEPENDENCIES
   less-rails
   pg
   pry-byebug
+  pry-stack_explorer
   rails (= 4.2.0)
   rails_12factor
   require_all

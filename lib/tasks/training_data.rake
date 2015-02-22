@@ -54,8 +54,12 @@ end
 namespace :training_data do
   desc 'Import records by reading JSON files from the command-line.'
   task :import, [:file] => :environment do |_task, args|
-    attributes_array = get_attributes(args)
-    add_people attributes_array
+    begin
+      attributes_array = get_attributes(args)
+      add_people attributes_array
+    rescue
+      puts "Usage: [bundle exec] rake training_data:import[filename]"
+    end
     StatisticsGenerator.new(Person).run
   end
 

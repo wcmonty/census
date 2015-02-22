@@ -54,6 +54,7 @@ end
 
 group :test do
   gem 'pry-byebug'
+  gem 'pry-stack_explorer'
   gem 'cucumber-rails', :require => false
   gem 'database_cleaner'
 end
