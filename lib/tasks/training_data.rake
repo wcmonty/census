@@ -58,4 +58,8 @@ namespace :training_data do
     add_people attributes_array
     StatisticsGenerator.new(Person).run
   end
+
+  task :clear => :environment do
+    Person.destroy_all
+  end
 end
