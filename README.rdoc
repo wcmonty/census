@@ -1,9 +1,9 @@
-=Summary
+=Naive Bayesian Classifier
 The U.S. Census Bureau had a hard-drive failure and lost a portion of their data about the
 gender of survey respondents. To help them guess at the gender of each respondent, we're
 going to use a Naive Bayes Classifier.
 
-=Assumptions
+==Assumptions
 There are numerous assumptions about the needs of the U.S. Census Bureau, that drove the design
 of the project.  The assumptions are listed below, along with the consequences of the assumptions:
 - The training data would include no more than 1,000,000 records. Since the data to analyze is 
@@ -27,7 +27,7 @@ of the project.  The assumptions are listed below, along with the consequences o
 - It is likely that the Census Bureau has other data sets that they would like to analyze.  It
   should be easy to process those data sets as well.
  
-=Implementation
+==Implementation
 There is a standard form that allows users to create, edit, and delete records for people.  
 On each of these actions, the statistics are generated and stored in the database.  In a real 
 system, this would probably be triggered periodically instead of from ActiveRecord callbacks, 
@@ -39,7 +39,42 @@ that is a string type to hold classifications and any column that is a float or 
 attributes.  In a real system, we would probably want to allow the columns to be specified 
 either in code or by the user.
 
-The statistics are displayed on the "Statistics" page.  They are automatically broken down by table, classification field, and attribute fields.
+The statistics are displayed on the "Statistics" page.  They are automatically broken down by table,
+classification field, and attribute fields.
 
 Data is predicted using the Bayesian Classifier on the 'Categorize' page.  Since the statistics are 
-stored, the statistics need to be looked up in the database and fed to the formulas along with the target data.  The user can enter data into all, some, or none of the form fields.  The system will make its best guess based on the available data.  If no data is entered, the function degenerates into the single probability of the classes and the class with the most entries is always chosen.
+stored, the statistics need to be looked up in the database and fed to the formulas along with the
+target data.  The user can enter data into all, some, or none of the form fields.  The system will
+make its best guess based on the available data.  If no data is entered, the function degenerates
+into the single probability of the classes and the class with the most entries is always chosen.
+
+=Data Importation
+The Census Bureau was fortunate enough to salvage some completed survey records that
+include the gender of the respondents, so all we need is a task to import this data into the
+database. The app must allow developers to import records by reading JSON files from the command-line.
+The import task to accomplish this must also be tested to ensure it behaves as expected. The import
+task must meet the following requirements:
+- It can be invoked from the command-line like so: `bundle exec rake training_data:import`
+- It requires a single command-line argument pointing to the JSON file containing the training data
+- It imports the data from the file into the app database using raw SQL inserts
+
+==Assumptions
+There are several assumptions that were made in order to implement this project.
+- The database already contains data when the import occurs.
+- The import data will be given in valid JSON format.  Please note that the data at
+  https://gist.github.com/kconarro14/52f2f6d497817f430b7e is not valid JSON (the closing bracket at
+  line 24 should not have a comma after it; the comma should be after the closing bracket at line 25).
+  A valid sample JSON of the sample data is at https://gist.github.com/wcmonty/e00b663d38f67fb49175 .
+- The file could be in the local filesystem or could be located at a URI.  The system should fetch a
+  remote file if a valid URI is given with the protocol set to 'http' or 'https'.  Otherwise, the filename
+  is treated like a local file.
+- The height is given in feet in decimal notation.  The system converts this to integer inches due to a previous
+  specification that the system can store the height as an integer.
+- The weight is given in pounds in decimal notation.  The system converts this to integer pounds due to a
+  previous specification that the system can store the height as an integer.
+- The height or weight can be missing from imported records, either because the key in the imported JSON
+  is missing or is set to null.
+- The import data may contain ids.  These ids can be safely ignored, considering that there could be conflicting
+  records currently in the database.
+- The data should either all be imported or none should be imported in the case of an error.
+- The statistics should not be generated until after all of the data is imported.
