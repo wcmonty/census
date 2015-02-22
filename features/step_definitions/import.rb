@@ -24,9 +24,9 @@ Then(/^there should be the following "([^"]*)" records:$/) do |record, table|
 end
 
 
-Then(/^there should be (\d+) "(.+)" records$/) do |number, record|
+Then(/^there should be (\d+) "(.+)" record(?:s)$/) do |number, record|
   klass = record.classify.constantize
-  expect(klass.count).to eq 50
+  expect(klass.count).to eq number.to_i
 end
 
 def replace_nils(hash)
