@@ -57,4 +57,8 @@ group :test do
   gem 'pry-stack_explorer'
   gem 'cucumber-rails', :require => false
   gem 'database_cleaner'
+
+  # Used to record HTTP interactions
+  gem 'vcr', require: false
+  gem 'webmock', require: false
 end

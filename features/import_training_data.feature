@@ -1,3 +1,4 @@
+@import_training
 Feature: Import Training Data
   As a developer
   I want to be able to import training data
