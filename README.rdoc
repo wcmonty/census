@@ -78,3 +78,5 @@ There are several assumptions that were made in order to implement this project.
   records currently in the database.
 - The data should either all be imported or none should be imported in the case of an error.
 - The statistics should not be generated until after all of the data is imported.
+- The rake task should be implemented for development, test, and production environments.  The development and test
+  environments use the SQLite, while production uses PostgreSQL.

@@ -47,7 +47,7 @@ def get_preparer
     when 'postgresql'
       PostgresqlPreparer
     else
-      raise "Database adapter not configured"
+      raise "Database adapter not implemented"
   end
 end
 
