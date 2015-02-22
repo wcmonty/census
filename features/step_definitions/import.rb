@@ -8,11 +8,13 @@ Given(/^I delete the file named "(.+)"$/) do |filename|
 end
 
 When(/^I import the data from "(.*)"$/) do |filename|
-  task = "training_data:import"
-  Rake.application[task].invoke(filename)
+  name = "training_data:import"
+  task = Rake.application[name]
+  task.reenable
+  task.invoke filename
 end
 
-Then(/^there should be a "([^"]*)" record with the following attributes:$/) do |record, table|
+Then(/^there should be the following "([^"]*)" records:$/) do |record, table|
   # table is a table.hashes.keys # => [:height, :weight, :gender]
   klass = record.classify.constantize
   table.hashes.each do |hash|

@@ -28,7 +28,6 @@ def convert_weight(pounds)
   pounds.round rescue nil
 end
 
-
 def add_people(attributes_array)
   preparer = get_preparer.new
   Person.transaction do
