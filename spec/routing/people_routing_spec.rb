@@ -10,10 +10,6 @@ RSpec.describe PeopleController, type: :routing do
       expect(get: '/people/new').to route_to('people#new')
     end
 
-    it 'routes to #show' do
-      expect(get: '/people/1').to route_to('people#show', id: '1')
-    end
-
     it 'routes to #edit' do
       expect(get: '/people/1/edit').to route_to('people#edit', id: '1')
     end
