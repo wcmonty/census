@@ -7,11 +7,9 @@ Given(/^I delete the file named "(.+)"$/) do |filename|
   File.delete(filename)
 end
 
+
 When(/^I import the data from "(.*)"$/) do |filename|
-  name = "training_data:import"
-  task = Rake.application[name]
-  task.reenable
-  task.invoke filename
+  invoke_task(filename)
 end
 
 Then(/^there should be the following "([^"]*)" records:$/) do |record, table|
@@ -29,8 +27,22 @@ Then(/^there should be (\d+) "(.+)" record(?:s)$/) do |number, record|
   expect(klass.count).to eq number.to_i
 end
 
+When(/^I import the data from a file that does not exist$/) do
+  filename = "#{Time.now.to_i}.#{Random.rand(1000000000)}.bar"
+end
+
 def replace_nils(hash)
   hash.each do |key, value|
     hash[key] = nil if value == 'nil'
   end
+end
+
+def invoke_task(filename)
+  task = Rake.application[task_name]
+  task.reenable
+  task.invoke filename
+end
+
+def task_name
+  "training_data:import"
 end

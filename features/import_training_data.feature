@@ -57,3 +57,15 @@ Feature: Import Training Data
       | Female | nil    | 110    |
       | Male   | 62     | nil    |
     And there should be 50 "person" records
+
+  Scenario: Import data from a file that does not exist
+    When I import the data from a file that does not exist
+    Then there should be 0 "person" records
+
+  Scenario: Import data from a malformed, local file
+    When I import the data from "features/test_data/invalid_import_data.json"
+    Then there should be 0 "person" records
+
+  Scenario: Import data from a malformed, remote file
+    When I import the data from "https://gist.githubusercontent.com/kconarro14/52f2f6d497817f430b7e/raw/e3e445a16ba7f8d2cd96b2c29e6a1d7734726f21/gender_classifier_training_data.json"
+    Then there should be 0 "person" records
