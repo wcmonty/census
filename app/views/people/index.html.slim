@@ -21,8 +21,8 @@ table.tablesorter.table.table-striped style='border: 1px'
         td style='text-align: center' = person.height || '-'
         td style='text-align: center' = person.weight || '-'
         td
-          a href='#{edit_person_path(person.id)}' Edit
-        td = link_to 'Destroy', person, data: {:confirm => 'Are you sure?'}, method: :delete
+          a href='#{edit_person_path(person.id)}' id="edit_#{person.id}" Edit
+        td = link_to 'Delete', person, data: {:confirm => 'Are you sure?'}, method: :delete, id: "destroy_#{person.id}"
 
 br
 a.btn.btn-default [href='#{new_person_path}'] New Person

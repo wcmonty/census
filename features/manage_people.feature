@@ -34,3 +34,31 @@ Feature: Manage People
     | male | -1     | 135    | negative weight     |
     | male | 60     | -1     | negative height     |
     | male | -1     | -1     | negative height and weight |
+
+  Scenario: Deleting a person
+    Given I have the following "person" records:
+      | id | gender | height | weight |
+      | 1  | female | 60     | 135    |
+      | 2  | male   | 60     | 135    |
+    When I visit "/people"
+    And I click on the "destroy_1" link
+    Then the page should not have the word "female"
+    And the page should have the word "male"
+
+  Scenario: Editing a person
+    Given I have the following "person" records:
+      | id | gender | height | weight |
+      | 1  | female | 60     | 135    |
+    When I visit "/people"
+    And I click on the "edit_1" link
+    And I select the male from "person[gender]"
+    And I fill the "person[height]" field with 72
+    And I fill the "person[weight]" field with 165
+    And I click on the "Submit" button
+    And I visit "/people"
+    Then the page should have the word "male"
+    And the page should have the word "72"
+    And the page should have the word "165"
+    And the page should not have the word "female"
+    And the page should not have the word "60"
+    And the page should not have the word "135"
