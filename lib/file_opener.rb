@@ -6,11 +6,7 @@ class FileOpener
   end
 
   def contents
-    begin
-      parse_json opener.contents
-    rescue
-      puts "Could not open #{filename}"
-    end
+    parse_json(get_contents)
   end
 
   protected
@@ -18,6 +14,15 @@ class FileOpener
   attr_reader :filename, :opener
 
   private
+
+  def get_contents
+    begin
+      opener.contents
+    rescue
+      puts "Could not open #{filename}"
+      empty_json
+    end
+  end
 
   def is_a_valid_uri?
     uri = URI(filename)
@@ -37,7 +42,11 @@ class FileOpener
       JSON.parse(contents)
     rescue
       puts 'Invalid JSON'
-      {}
+      JSON.parse(empty_json)
     end
+  end
+
+  def empty_json
+    '{"people": []}'
   end
 end
