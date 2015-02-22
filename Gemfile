@@ -58,6 +58,9 @@ group :test do
   gem 'cucumber-rails', :require => false
   gem 'database_cleaner'
 
+  # Open HTML pages for Capybara troubleshooting
+  gem 'launchy'
+
   # Used to record HTTP interactions
   gem 'vcr', require: false
   gem 'webmock', require: false
