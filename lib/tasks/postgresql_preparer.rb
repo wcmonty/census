@@ -9,6 +9,9 @@ class PostgresqlPreparer
   end
 
   def close
+    # Not technically necessary because the prepared statement
+    # is de-allocated once the session ends, but it is probably
+    # good to clean up
     connection.exec("DEALLOCATE #{name}")
   end
 
