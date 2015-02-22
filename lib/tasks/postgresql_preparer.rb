@@ -9,7 +9,7 @@ class PostgresqlPreparer
   end
 
   def close
-    connection.execute("DEALLOCATE #{name}")
+    connection.exec("DEALLOCATE #{name}")
   end
 
   protected
