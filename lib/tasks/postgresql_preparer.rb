@@ -5,7 +5,7 @@ class PostgresqlPreparer
   end
 
   def execute(*args)
-    connection.exec_prepared(args)
+    connection.exec_prepared(name, args)
   end
 
   def close
