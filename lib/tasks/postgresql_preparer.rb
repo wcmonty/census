@@ -4,7 +4,7 @@ class PostgresqlPreparer
   end
 
   def execute(*args)
-    statement.exec_prepared(args)
+    statement.execute(args)
   end
 
   def close
