@@ -1,7 +1,8 @@
 # Singleton class for performing statistical calculations
 class StatisticsCalculator
   def self.probability_density(mean, variance, value)
-    probability_density_multiplier(variance) * Math.exp(probability_density_exponent(mean, variance, value))
+    exponent = probability_density_exponent(mean, variance, value)
+    probability_density_multiplier(variance) * Math.exp(exponent)
   rescue
     1 # Multiplicative identity
   end
@@ -23,14 +24,18 @@ class StatisticsCalculator
     end
   end
 
+  private
+
   def self.probability_density_exponent(mean, variance, value)
-    value_to_square = (value - mean) # Can divide by zero
-    -0.5 * value_to_square * value_to_square / variance
+    raise ZeroDivisionError if variance == 0
+    value_to_square = (value - mean)
+    (-0.5 * value_to_square * value_to_square) / variance
   end
 
   def self.probability_density_multiplier(variance)
+    raise ZeroDivisionError if variance == 0
     denominator = Math.sqrt(2 * Math::PI * variance)
-    1.to_f / denominator # Can divide by zero
+    1.0 / denominator
   end
 
   def self.sum_of_squares_of_differences(array)
