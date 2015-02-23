@@ -7,12 +7,13 @@ class StatisticsCalculator
   end
 
   def self.mean(array)
-    compacted_array = array.compact
-    compacted_array.reduce(&:+).to_f / compacted_array.size rescue 0
+    compacted_array = array.select { |element| element.is_a? Numeric }
+    return 0 if compacted_array.empty?
+    compacted_array.reduce(&:+).to_f / compacted_array.size
   end
 
   def self.sample_variance(array)
-    compacted_array = array.compact
+    compacted_array = array.select { |element| element.is_a? Numeric }
     return 0 if compacted_array.size <= 1
 
     begin
